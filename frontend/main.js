@@ -1,4 +1,4 @@
-window.onload = function (){ //Assign HTML elements
+window.onload = function (){ //Assign elements and global variables
   var zip = document.querySelector('#zip'),
       zipSubmit = document.querySelector('#zip-submit'),
       breweryList = document.querySelector('#brewery-list'),
@@ -45,7 +45,7 @@ window.onload = function (){ //Assign HTML elements
       })
     };
     map.fitBounds(bounds);
-  };
+  }; // End of initMap
 
 
   function pageCtrl(what, data) {
@@ -86,11 +86,17 @@ window.onload = function (){ //Assign HTML elements
     // if (what === "found") {
     //   geolocation implementation
     // }
-  }
+
+    // if (what === "brewery") {
+    //     brewery specifics page implementation
+    // }
+
+  } // End of pageCtrl
 
   function breweryListener(element){ // Add listeners breweries and post for brewery specifics
+    element.addEventListener('click', function(){
 
-
+    });
   }
 
 }; // End window.onload
