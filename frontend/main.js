@@ -2,7 +2,12 @@ window.onload = function (){ //Assign elements and global variables
   var zip = document.querySelector('#zip'),
       zipSubmit = document.querySelector('#zip-submit'),
       breweryList = document.querySelector('#brewery-list'),
-      newData = '',
+      breweryInfo = document.querySelector('#brewery-info'),
+      beerList = document.querySelector('#beer-list')
+      listPage = document.querySelectorAll('.list-page'),
+      breweryPage = document.querySelectorAll('.brewery-page'),
+      currentData = "", // Most recent selected location data
+      currentBrewery = "", // Most recent selected brewery data
       lat = "",
       lng = "";
 
@@ -20,8 +25,8 @@ window.onload = function (){ //Assign elements and global variables
     }).done(function(response) {
       console.log( "response:", response);
       if (response.currentPage){
-      pageCtrl('submit', response.data);
-    }
+      pageCtrl('list', response.data);
+      }
     });
   }); //End zipcode submission
 
@@ -35,13 +40,13 @@ window.onload = function (){ //Assign elements and global variables
     };
     var map = new google.maps.Map(document.getElementById("map"),
         mapOptions);
-    for (var i = newData.length-1; i >= 0; i--){ // Written with data passed to changing global variable.
-      var position = new google.maps.LatLng(newData[i].latitude, newData[i].longitude);
+    for (var i = currentData.length-1; i >= 0; i--){ // Written with data passed to changing global variable.
+      var position = new google.maps.LatLng(currentData[i].latitude, currentData[i].longitude);
       bounds.extend(position);
       var marker = new google.maps.Marker({
         position: position,
         map: map,
-        title: newData[i].brewery.name
+        title: currentData[i].brewery.name
       })
     };
     map.fitBounds(bounds);
@@ -49,14 +54,14 @@ window.onload = function (){ //Assign elements and global variables
 
 
   function pageCtrl(what, data) {
-    if (what === "submit") { // Render brewery list after zip search
-      for (var i = data.length-1; i >= 0; i--){
-        newData = data;
+    if (what === "list") { // Render brewery list after zip search
+      for (var i = 0; i < data.length; i++) {
+        currentData = data;
         var breweryEntry = document.createElement('div');
-        breweryListener(breweryEntry);
+        breweryListener(breweryEntry, i);
         breweryEntry.id = "brewery-entry";
         var breweryName = document.createElement('h3');
-        var name = document.createTextNode((data.length - i) + ". " + data[i].brewery.name);
+        var name = document.createTextNode(i + 1 + ". " + data[i].brewery.name);
         breweryName.appendChild(name);
         breweryEntry.appendChild(breweryName);
         breweryName.id = "brewery-name";
@@ -77,26 +82,59 @@ window.onload = function (){ //Assign elements and global variables
         breweryAdd.id = "brewery-address";
         breweryList.appendChild(breweryEntry);
       }
+      show(what);
     }
-    if (what === "submit") {
+    if (what === "list") { // Inital center point for map until bounds function takes over
       lat = data[1].latitude;
       lng = data[1].longitude;
       initMap(lat,lng);
     }
-    // if (what === "found") {
-    //   geolocation implementation
-    // }
+    if (what === "brewery") { // Render brewery information after entry click
+      breweryInfo.innerHTML = '';
+      beerList.innerHTML = '';
+      var breweryName = document.createElement('h2');
+      var name = document.createTextNode(data[0].data.name);
+      breweryName.appendChild(name);
+      show(what);
+    }
 
-    // if (what === "brewery") {
-    //     brewery specifics page implementation
-    // }
+  };// End of pageCtrl
 
-  } // End of pageCtrl
-
-  function breweryListener(element){ // Add listeners breweries and post for brewery specifics
-    element.addEventListener('click', function(){
-
+  function breweryListener(element, num){ // Add listeners breweries and post for brewery specifics
+    element.addEventListener('click', function(ev){
+      ev.preventDefault();
+      var getId = currentData[num].breweryId;
+      $.ajax({
+        url: url + "/brewery",
+        method: 'POST',
+        data: {breweryId: getId},
+        dataType: 'json'
+      }).done(function(response) {
+        console.log("response1:", response);
+        currentBrewery = response;
+        if (response[0].message === "Request Successful"){
+          pageCtrl("brewery", currentBrewery);
+        }
+      });
     });
-  }
+  };
 
+  function show(dis) {
+    if (dis === "brewery") {
+      for (var i = 0; i < listPage.length; i++){ // Two for loops to show Brewery Page
+        listPage[i].style.display = "none";
+      }
+      for (var i = 0; i < breweryPage.length; i++){
+        breweryPage[i].style.display = "block";
+      }
+    }
+    if (dis === "list") {
+      for (var i = 0; i < listPage.length; i++){ // Two for loops to show Brewery Page
+        listPage[i].style.display = "block";
+      }
+      for (var i = 0; i < breweryPage.length; i++){
+        breweryPage[i].style.display = "none";
+      }
+    }
+  }
 }; // End window.onload
