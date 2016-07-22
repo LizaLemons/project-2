@@ -1,0 +1,39 @@
+#brewery-name {
+  margin: 5px 0px 5px 0px;
+}
+
+#brewery-type {
+  margin: 0px 0px 5px 0px;
+}
+
+#brewery-address {
+  margin: 5px 0px 5px 0px;
+}
+
+#brewery-entry {
+  background: #B0C4DE;
+  width: 50vw;
+  margin: 10px;
+  padding: 5px;
+}
+
+#brewery-list {
+  position: relative;
+  top: 30px;
+}
+
+header {
+  z-index: 1;
+  position: fixed;
+  background-color: white;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  height: 30px;
+}
+
+#zip, #zip-submit {
+  margin-top: 5px;
+  margin-left: 15px;
+
+}
