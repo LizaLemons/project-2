@@ -1,5 +1,7 @@
 window.onload = function (){ //Assign elements and global variables
-  var zip = document.querySelector('#zip'),
+  var checkList = document.querySelector('#checklist'),
+      checkButton = document.querySelector('#checklist-button'),
+      zip = document.querySelector('#zip'),
       zipSubmit = document.querySelector('#zip-submit'),
       breweryList = document.querySelector('#brewery-list'),
       breweryInfo = document.querySelector('#brewery-info'),
@@ -12,6 +14,15 @@ window.onload = function (){ //Assign elements and global variables
       lng = "";
 
   var url = 'http://localhost:3000';
+
+  checkButton.addEventListener('click', function(){ // Get list of added beers
+    $.ajax({
+      url: url + '/beers',
+      dataType: 'json'
+    }).done(function(response){
+      console.log("response: ", response);
+    });
+  })
 
   zipSubmit.addEventListener('click', function(ev){ // Zipcode submission
     ev.preventDefault();
@@ -143,9 +154,11 @@ window.onload = function (){ //Assign elements and global variables
             beerAbv.id = "abv";
           }
           var add = document.createElement('button');
-          add.innerHTML = "Pin to CheckList"
+          add.innerHTML = "Pin to Checklist"
+          add.id = "add-button"
           beerEntry.appendChild(add);
           beerList.appendChild(beerEntry);
+          pinListener(data[0].data.name, add, short);
         }
       //}
       show(what);
@@ -169,6 +182,26 @@ window.onload = function (){ //Assign elements and global variables
           pageCtrl("brewery", currentBrewery);
         }
       });
+    });
+  };
+
+  function pinListener(brewery, element, beer) {
+    element.addEventListener('click', function(){
+      var data = {
+        beerId: beer.id,
+        name: beer.name,
+        brewery: brewery,
+        style: beer.style.name
+      }
+      $.ajax({
+        url: url + '/beers/new',
+        method: 'POST',
+        data: data,
+        dataType: 'json'
+      }).done(function(response) {
+        console.log( "response: ", response );
+      });
+      console.log(data);
     });
   };
 
