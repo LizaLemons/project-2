@@ -95,6 +95,59 @@ window.onload = function (){ //Assign elements and global variables
       var breweryName = document.createElement('h2');
       var name = document.createTextNode(data[0].data.name);
       breweryName.appendChild(name);
+      breweryInfo.appendChild(breweryName);
+      breweryName.id = "brewery-info-name";
+      var breweryEst = document.createElement('p');
+      var est = document.createTextNode("Established: " + data[0].data.established);
+      breweryEst.appendChild(est);
+      breweryInfo.appendChild(breweryEst);
+      breweryEst.id = "brewery-info-est";
+      var breweryWeb = document.createElement('a');
+      breweryWeb.href = data[0].data.website;
+      breweryWeb.innerHTML = data[0].data.website;
+      breweryInfo.appendChild(breweryWeb);
+      breweryWeb.id = "brewery-info-web";
+      var breweryDesc = document.createElement('p');
+      var desc = document.createTextNode("Description: " + data[0].data.description);
+      breweryDesc.appendChild(desc);
+      breweryInfo.appendChild(breweryDesc);
+      breweryDesc.id = "brewery-info-desc";
+      //if (data[1].data.length < 10) {
+        for (var i = 0; i < data[1].data.length; i++) { //Print list of beers
+          var short = data[1].data[i];
+          var beerEntry = document.createElement('div');
+          beerEntry.id = "beer-entry";
+          var beerName = document.createElement('h4');
+          var nameBeer = document.createTextNode("Name: " + short.name);
+          beerName.appendChild(nameBeer);
+          beerEntry.appendChild(beerName);
+          if (short.style) {
+            var beerStyle = document.createElement('p');
+            var style = document.createTextNode("Style: " + short.style.name)
+            beerStyle.appendChild(style);
+            beerEntry.appendChild(beerStyle);
+            beerStyle.id = "beer-style";
+          }
+          if (short.available) {
+            var beerAvail = document.createElement('p');
+            var avail = document.createTextNode("Availability: " + short.available.name);
+            beerAvail.appendChild(avail);
+            beerEntry.appendChild(beerAvail);
+            beerAvail.id = "available"
+          }
+          if (short.abv) {
+            var beerAbv = document.createElement('p')
+            var abv = document.createTextNode("ABV: " + short.abv);
+            beerAbv.appendChild(abv);
+            beerEntry.appendChild(beerAbv);
+            beerAbv.id = "abv";
+          }
+          var add = document.createElement('button');
+          add.innerHTML = "Pin to CheckList"
+          beerEntry.appendChild(add);
+          beerList.appendChild(beerEntry);
+        }
+      //}
       show(what);
     }
 
@@ -124,9 +177,8 @@ window.onload = function (){ //Assign elements and global variables
       for (var i = 0; i < listPage.length; i++){ // Two for loops to show Brewery Page
         listPage[i].style.display = "none";
       }
-      for (var i = 0; i < breweryPage.length; i++){
-        breweryPage[i].style.display = "block";
-      }
+      breweryPage[0].style.display = "block";
+      breweryPage[1].style.display = "flex"
     }
     if (dis === "list") {
       for (var i = 0; i < listPage.length; i++){ // Two for loops to show Brewery Page
