@@ -9,7 +9,7 @@
     <header>
       <input id="zip" type="text" name="name" value="" placeholder="Zip Code">
       <button id="zip-submit">Submit</button>
-      <button id="checklist-button">Checklist</button>
+      <button id="checklist-button">Show Checklist</button>
     </header>
     <div class="list-page" id="brewery-list"></div>
     <div class="list-page" id="map-container">
@@ -17,6 +17,11 @@
     </div>
     <div class="brewery-page" id="brewery-info"></div>
     <div class="brewery-page" id="beer-list"></div>
+    <div id="checklist">
+      <h2>Get drinking!:</h2>
+      <div id='checklist-beers'></div>
+    </div>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkwZNsbToBJHN_1iVuuT-VehGZo2r802g&callback=initMap" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="main.js" charset="utf-8"></script>

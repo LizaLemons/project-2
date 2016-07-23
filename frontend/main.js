@@ -10,10 +10,21 @@ window.onload = function (){ //Assign elements and global variables
       breweryPage = document.querySelectorAll('.brewery-page'),
       currentData = "", // Most recent selected location data
       currentBrewery = "", // Most recent selected brewery data
+      currentChecklist = "",
       lat = "",
       lng = "";
 
   var url = 'http://localhost:3000';
+
+  $(checkButton).click(function() { //Hide or show checklist, change button text to match
+    $(checkList).slideToggle("slow", function() {
+      if (checkButton.innerText === "Show Checklist") {
+        checkButton.innerText = "Hide Checklist"
+      } else if (checkButton.innerText === "Hide Checklist") {
+        checkButton.innerText = "Show Checklist"
+      }
+    });
+  });
 
   checkButton.addEventListener('click', function(){ // Get list of added beers
     $.ajax({
@@ -21,6 +32,10 @@ window.onload = function (){ //Assign elements and global variables
       dataType: 'json'
     }).done(function(response){
       console.log("response: ", response);
+      currentChecklist = response;
+      if (response) {
+        fillChecklist();
+      }
     });
   })
 
@@ -221,5 +236,13 @@ window.onload = function (){ //Assign elements and global variables
         breweryPage[i].style.display = "none";
       }
     }
+  }// End show
+
+  function fillChecklist (){
+    console.log(currentChecklist);
+    for (var i = 0; i < currentChecklist; i++){
+      var beerList = querySelector('#checklist-beers');
+    }
   }
+
 }; // End window.onload

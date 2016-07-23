@@ -32,7 +32,7 @@ app.get('/beers', function(request, response){
           response.json("No beers found");
         }
         db.close(function() {
-          console.log( "database CLOSED");
+          console.log( "DB Closed");
         });
       }); // end find
     }
@@ -47,9 +47,10 @@ app.post('/beers/new', function(request, response){
       console.log('Cannot connect to mongoDB. ERROR:', err);
     } else {
       console.log('Connection established to', mongoUrl);
-      console.log('Adding a user');
-      var newUser = request.body;
-      beersCollection.insert([newUser], function (err, result) {
+      console.log('Adding a beer');
+      var newBeer = request.body;
+      var id = request.body.beerId
+      beersCollection.update({beerId: id}, {$setOnInsert: newBeer}, {upsert: true}, function (err, result) {
         if (err) {
           console.log(err);
           response.json("error");
@@ -114,6 +115,6 @@ app.post('/brewery', function(req,res){ //Receive selected brewery
   })
 });
 
-app.listen(3000, function(){
-  console.log('listening on 3000...')
+app.listen(PORT, function(){
+  console.log('listening on ' + PORT + '...')
 });
