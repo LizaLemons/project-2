@@ -238,11 +238,37 @@ window.onload = function (){ //Assign elements and global variables
     }
   }// End show
 
-  function fillChecklist (){
-    console.log(currentChecklist);
-    for (var i = 0; i < currentChecklist; i++){
-      var beerList = querySelector('#checklist-beers');
+  function fillChecklist (){ //Populate checklist from currentChecklist
+    var checklistBeers = document.querySelector('#checklist-beers');
+    checklistBeers.innerHTML = '';
+    for (var i = 0; i < currentChecklist.length; i++){
+      var beerEntry = document.createElement('div');
+      var beerName = document.createElement('h4');
+      var name = document.createTextNode(currentChecklist[i].name);
+      beerName.appendChild(name);
+      beerEntry.appendChild(beerName);
+      var brewName = document.createElement('p');
+      var brewery = document.createTextNode(currentChecklist[i].brewery);
+      brewName.appendChild(brewery);
+      beerEntry.appendChild(brewName);
+      var beerStyle = document.createElement('p');
+      var style = document.createTextNode(currentChecklist[i].style);
+      beerStyle.appendChild(style);
+      beerEntry.appendChild(beerStyle);
+      var deleteBeer = document.createElement('button');
+      deleteBeer.innerHTML = "Tried it!"
+      deleteBeer.id = "delete-button"
+      beerEntry.appendChild(deleteBeer);
+      checklistBeers.appendChild(beerEntry);
+      delListener(deleteBeer);
     }
+  } //End fillChecklist
+
+  function delListener(button) {
+    button.addEventListener('click', function(){
+      
+
+    })
   }
 
 }; // End window.onload
