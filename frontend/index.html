@@ -3,27 +3,35 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <title>Find A Brewery!</title>
   </head>
   <body>
-    <header>
+    <div id="background-cheers"></div>
+    <header class="z-depth-2">
       <input id="zip" type="text" name="name" value="" placeholder="Zip Code">
       <button id="zip-submit">Submit</button>
       <button id="checklist-button">Show Checklist</button>
     </header>
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
     <div class="list-page" id="brewery-list"></div>
     <div class="list-page" id="map-container">
       <div id="map"></div>
     </div>
     <div class="brewery-page" id="brewery-info"></div>
-    <div class="brewery-page" id="beer-list"></div>
-    <div id="checklist">
-      <h2>Get drinking!:</h2>
+    <div class="brewery-page" id="beer-list">
+      <div id="beer-container"></div>
+    </div>
+    <div id="checklist" class="z-depth-2");>
+      <h4 id="checklist-welcome">Get drinking!:</h4>
       <div id='checklist-beers'></div>
     </div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkwZNsbToBJHN_1iVuuT-VehGZo2r802g&callback=initMap" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script src="main.js" charset="utf-8"></script>
   </body>
 </html>

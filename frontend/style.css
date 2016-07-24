@@ -1,24 +1,64 @@
+#background-cheers {
+  position: absolute;
+  z-index: -5;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background: rgb(238,238,238);
+  opacity: 0.6;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 #brewery-name, #brewery-info-name {
   margin: 5px 0px 5px 0px;
 }
 
-#brewery-type, #brewery-info-est {
+#brewery-type {
   margin: 0px 0px 5px 0px;
 }
 
+#brewery-info-est {
+  margin: 10px 0px 5px 10px;;
+}
+
+#brewery-info-web{
+  margin-left: 10px;
+}
+
 #brewery-address {
-  margin: 5px 0px 5px 0px;
+  margin: 5px 0px 15px 0px;
 }
 
 #brewery-info-desc {
-  margin: 5px 0px 5px 0px;
+  margin: 5px 15px 0px 15px;
+  padding-bottom: 15px;
+}
+
+#beer-name {
+  margin-left: 5px;
+}
+
+#beer-style, #available, #abv {
+  margin: 5px 0px 0px 15px;
+}
+
+#add-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 #brewery-entry {
-  background: #B0C4DE;
-  width: auto;
+  width: 52vw;
   margin: 10px;
   padding: 5px;
+  float: left;
+  background-color: white;
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 #brewery-list {
@@ -26,6 +66,11 @@
   margin-left: 15px;
   margin-right: 43vw;
   top: 30px;
+}
+
+.progress {
+  display: none;
+  top: 35px;
 }
 
 #map-container {
@@ -43,31 +88,38 @@
 
 #brewery-info {
   position: static;
-  background: #B0C4DE;
+  background: rgba(161,201,200, 0.8);
   margin-right: 10px;
-  margin-top: 35px;
-  width: 98vw;
+  margin-top: 40px;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #beer-list {
   position: static;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
-  background: #B0C4DE;
-  margin-right: 10px;
+  margin-right: 15px;
   margin-top: 15px;
+  margin-bottom: 15px;
   width: 98vw;
 }
 
+
 .brewery-page {
   display: none;
+  background: rgb(238,238,238);
 }
 
 
 #beer-entry {
+  background: rgba(161,201,200, 0.8);
   width: 400px;
-  margin: 0px 10px 10px 0px;
+  margin-bottom: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 header {
@@ -77,29 +129,57 @@ header {
   width: 100vw;
   top: 0;
   left: 0;
-  height: 30px;
+  height: 40px;
 }
 
 #zip, #zip-submit {
+  width: 100px;
   margin-top: 5px;
-  margin-left: 15px;
+  height: 2rem;
+  margin-bottom: 0px;
+}
 
+#zip-submit {
+  margin-left: 15px;
+}
+
+#zip {
+  margin-left: 25px;
 }
 
 #checklist-button {
   position: absolute;
   right: 0px;
   margin-top: 5px;
-  margin-right: 5px;
+  margin-right: 54px;
 }
 
 #checklist {
   display: none;
   z-index: 1;
   position: absolute;
-  background: #FA8072;
+  background: white;
   width: 400px;
   height: auto;
-  top: 30px;
+  top: 40px;
   right: 0px;
+}
+
+#delete-button {
+  float: right;
+  margin: -30px 10px 10px 00px;
+}
+
+#check-brew-name{
+  margin: 5px 0px 0px 15px;
+}
+
+#checklist-welcome {
+  margin: 5px 0px 10px 5px;
+}
+
+#checklist-entry {
+  background-color: rgba(161,201,200, 0.5);
+  padding-left: 10px;
+  margin-bottom: 10px;
 }
