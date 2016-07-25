@@ -5,14 +5,14 @@ var express = require('express'),
     request = require('request'),
     app = express(),
     BREWERYDB_KEY = process.env.BREWERYDB_KEY,
-    PORT = 3000,
+    PORT = process.env.PORT || 80 || 3000,
     breweryInfo = [];
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 
 var MongoClient = mongodb.MongoClient;
-var mongoUrl = 'mongodb://localhost:27017/beer_checklist';
+var mongoUrl = MONGODB_URI;
 
 app.get('/beers', function(request, response){
   MongoClient.connect(mongoUrl, function (err, db) {

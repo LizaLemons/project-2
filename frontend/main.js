@@ -16,7 +16,8 @@ window.onload = function (){ //Assign elements and global variables
       lng = "";
 
   progress.style.display = 'none'; //progress bar, API is slow sometimes
-  var url = 'http://localhost:3000';
+  // var url = 'http://localhost:3000';
+  var url = 'https://mighty-refuge-57413.herokuapp.com'
 
   $(checkButton).click(function() { //Hide or show checklist, change button text to match
     $(checkList).slideToggle("slow", function() {
